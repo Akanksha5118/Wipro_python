@@ -1,3 +1,4 @@
+# Question 1(c) : Demonstrate the difference between using the iterator and generator by printing values using a for loop
 class NumberIterator:
     def __init__(self, n):
         self.n = n
@@ -13,19 +14,16 @@ class NumberIterator:
             return value
         else:
             raise StopIteration
-
+# Using the iterator in a for loop
+print("Iterator Output:")
+for num in NumberIterator(5):
+    print(num)
 def fibonacci_generator(n):
     a, b = 0, 1
     for _ in range(n):
         yield a
         a, b = b, a + b
-
-if __name__ == "__main__":
-    print("Iterator Output:")
-    iterator = NumberIterator(5)
-    for num in iterator:
-        print(num)
-
-    print("\nGenerator Output:")
-    for num in fibonacci_generator(5):
-        print(num)
+# Using the generator in a for loop
+print("\nGenerator Output:")
+for num in fibonacci_generator(5):
+    print(num)
