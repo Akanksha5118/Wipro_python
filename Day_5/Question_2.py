@@ -1,52 +1,37 @@
-import re
+# Base Class
+class Calculator:
+    def calculate(self, a, b):
+        return a + b
 
-print("----- STRONG PASSWORD VALIDATION -----")
-
-password = "Abhay@123"
-
-password_pattern = r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$"
-
-if re.match(password_pattern, password):
-    print("Password:", password, "-> Strong Password")
-else:
-    print("Password:", password, "-> Weak Password")
+# AdvanceCalculator that overrides a method
+class AdvancedCalculator(Calculator):
+    def calculate(self, a, b):
+        # overriding the method
+        return a * b
 
 
-print("\n----- REGEX MODIFIERS DEMONSTRATION -----")
+# Operator Overloading
+class Number:
+    def __init__(self, value):
+        self.value = value
 
-# re.IGNORECASE example
-text1 = "Python is Powerful"
-pattern1 = "python"
-match1 = re.search(pattern1, text1, re.IGNORECASE)
+    def __add__(self, other):
+        return Number(self.value + other.value)
 
-print("IGNORECASE Match:", match1.group() if match1 else "No match")
+    def display(self):
+        print(self.value)
 
+# Polymorphism demonstration
+calc = Calculator()
+adv_calc = AdvancedCalculator()
 
-# re.MULTILINE example
-text2 = """Python is easy
-Java is powerful
-Python is popular"""
-
-pattern2 = r"^Python"
-matches2 = re.findall(pattern2, text2, re.MULTILINE)
-
-print("MULTILINE Matches:", matches2)
+print("Calculator result:", calc.calculate(5, 3))        # Addition
+print("AdvancedCalculator result:", adv_calc.calculate(5, 3))  # Multiplication
 
 
-# re.DOTALL example
-text3 = "Hello\nWorld"
-pattern3 = "Hello.*World"
 
-match3 = re.search(pattern3, text3, re.DOTALL)
-print("DOTALL Match:", "Matched" if match3 else "No match")
+n1 = Number(10)
+n2 = Number(20)
 
-
-print("\n----- COMBINED MODIFIERS -----")
-
-text4 = """hello World
-HELLO Python"""
-
-pattern4 = r"^hello"
-matches4 = re.findall(pattern4, text4, re.IGNORECASE | re.MULTILINE)
-
-print("IGNORECASE + MULTILINE Matches:", matches4)
+n3 = n1 + n2
+n3.display()
